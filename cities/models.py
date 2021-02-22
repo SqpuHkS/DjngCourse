@@ -10,7 +10,7 @@ class City(models.Model):
         return self.name
 
     def get_absolute_url(self):
-        return reverse('cities:detail', kwargs={'pk': self.pk})
+        return reverse('trains:detail', kwargs={'pk': self.pk})
 
     class Meta:
         verbose_name_plural = 'Cities'

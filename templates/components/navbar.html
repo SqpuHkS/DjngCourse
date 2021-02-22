@@ -1,4 +1,4 @@
-{% url 'cities:home' as cities_home_url %}
+{% url 'trains:home' as cities_home_url %}
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
     <a class="navbar-brand" href="">FindRoute</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item {% if request.path == cities_home_url %}active{% endif %}">
-                <a class="nav-link" href="{% url 'cities:home' %}">Cities</a>
+                <a class="nav-link" href="{% url 'trains:home' %}">Cities</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>

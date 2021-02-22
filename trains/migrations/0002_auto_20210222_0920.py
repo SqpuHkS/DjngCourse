@@ -7,7 +7,7 @@ import django.db.models.deletion
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('cities', '0002_auto_20210213_1959'),
+        ('trains', '0002_auto_20210213_1959'),
         ('trains', '0001_initial'),
     ]
 
@@ -15,11 +15,11 @@ class Migration(migrations.Migration):
         migrations.AlterField(
             model_name='train',
             name='from_city',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='from_city_set', to='cities.city', verbose_name='From city'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='from_city_set', to='trains.city', verbose_name='From city'),
         ),
         migrations.AlterField(
             model_name='train',
             name='to_city',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='to_city_set', to='cities.city', verbose_name='To city'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='to_city_set', to='trains.city', verbose_name='To city'),
         ),
     ]

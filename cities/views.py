@@ -43,14 +43,14 @@ class CityUpdateView(SuccessMessageMixin, UpdateView):
     model = City
     form_class = CityForm
     template_name = 'cities/update.html'
-    success_url = reverse_lazy('cities:home')
+    success_url = reverse_lazy('trains:home')
     success_message = 'City updated'
 
 
 class CityDeleteView(DeleteView):
     model = City
     template_name = 'cities/delete.html'
-    success_url = reverse_lazy('cities:home')
+    success_url = reverse_lazy('trains:home')
 
 class CityListView(ListView):
     paginate_by = 3
