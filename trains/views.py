@@ -24,7 +24,7 @@ def home(request):
 
 
 class TrainListView(ListView):
-    paginate_by = 3
+    paginate_by = 5
     model = Train
     template_name = 'trains/home.html'
 
