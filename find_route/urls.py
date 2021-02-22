@@ -20,5 +20,6 @@ from cities.urls import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('trains/', include(('trains.urls', 'cities'))),
+    path('cities/', include(('cities.urls', 'cities'))),
+    path('trains/', include(('trains.urls', 'trains'))),
 ]
