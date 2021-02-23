@@ -8,7 +8,7 @@ urlpatterns = [
     # path('add/', TrainCreateView.as_view(), name='create'),
     # path('edit/<int:pk>', TrainUpdateView.as_view(), name='update'),
     # path('delete/<int:pk>', TrainDeleteView.as_view(), name='delete'),
-    # path('detail/<int:pk>/', TrainDetailView.as_view(), name='detail'),
+    path('detail/<int:pk>/', TrainDetailView.as_view(), name='detail'),
 ]
 
 app_name = 'trains'
