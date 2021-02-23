@@ -17,6 +17,7 @@ from django.contrib import admin
 from django.urls import path, include
 
 from cities.urls import *
+from trains.urls import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),

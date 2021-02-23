@@ -10,3 +10,5 @@ urlpatterns = [
     path('delete/<int:pk>', CityDeleteView.as_view(), name='delete'),
     path('detail/<int:pk>/', CityDetailView.as_view(), name='detail'),
 ]
+
+app_name = 'cities'

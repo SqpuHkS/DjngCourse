@@ -28,6 +28,10 @@ class TrainListView(ListView):
     model = Train
     template_name = 'trains/home.html'
 
+# class TrainDetailView(DetailView):
+#     queryset = Train.objects.all()
+#     template_name = 'trains/detail.html'
+
 
 # class TrainDetailView(DetailView):
 #     queryset = Train.objects.all()

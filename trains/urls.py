@@ -10,3 +10,5 @@ urlpatterns = [
     # path('delete/<int:pk>', TrainDeleteView.as_view(), name='delete'),
     # path('detail/<int:pk>/', TrainDetailView.as_view(), name='detail'),
 ]
+
+app_name = 'trains'

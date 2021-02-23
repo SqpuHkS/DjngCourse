@@ -13,15 +13,15 @@
                 {% for object in page_obj %}
                     <tr>
                         <td>
-                            <a href="{% url 'trains:detail' pk=object.pk %}">{{ object.name }}</a>
+                            <a href="{% url 'cities:detail' pk=object.pk %}">{{ object.name }}</a>
                         </td>
                         <td>
-                            <a href="{% url 'trains:update' pk=object.pk %}">
+                            <a href="{% url 'cities:update' pk=object.pk %}">
                                 <button type="submit" class="btn btn-primary">Edit</button>
                             </a>
                         </td>
                         <td>
-                            <a href="{% url 'trains:delete' pk=object.pk %}">
+                            <a href="{% url 'cities:delete' pk=object.pk %}">
                                 <button type="submit" class="btn btn-danger">Delete</button>
                             </a>
                         </td>
