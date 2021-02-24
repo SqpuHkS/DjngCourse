@@ -1,5 +1,6 @@
 from django import forms
 
+from cities.models import City
 from trains.models import Train
 
 
@@ -15,11 +16,11 @@ class TrainForm(forms.ModelForm):
         'placeholder': 'Travel time',
     }))
 
-    from_city = forms.ModelChoiceField(label='From', queryset=Train.objects.all(), widget=forms.Select(attrs={
+    from_city = forms.ModelChoiceField(label='From', queryset=City.objects.all(), widget=forms.Select(attrs={
         'class': 'form-control',
     }))
 
-    to_city = forms.ModelChoiceField(label='To', queryset=Train.objects.all(), widget=forms.Select(attrs={
+    to_city = forms.ModelChoiceField(label='To', queryset=City.objects.all(), widget=forms.Select(attrs={
         'class': 'form-control',
     }))
 
