@@ -48,5 +48,5 @@ class TrainUpdateView(SuccessMessageMixin, UpdateView):
 
 class TrainDeleteView(DeleteView):
     model = Train
-#     template_name = 'trains/delete.html'
+    template_name = 'trains/delete.html'
     success_url = reverse_lazy('trains:home')

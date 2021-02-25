@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.db import models
+from django.urls import reverse
 
 from cities.models import City
 
@@ -13,9 +14,13 @@ class Train(models.Model):
     def __str__(self):
         return f'Train №{self.name} from city {self.from_city}'
 
+
     class Meta:
         verbose_name_plural = 'Trains'
         ordering = ['travel_time']
+
+    def get_absolute_url(self):
+        return reverse('trains:home')
 
     def clean(self, *args, **kwargs):
         if self.from_city == self.to_city:
