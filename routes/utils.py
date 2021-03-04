@@ -1,4 +1,4 @@
-
+from trains.models import Train
 
 
 def dfs_path(graph, start, goal):
@@ -22,4 +22,13 @@ def get_graph(qs):
     return graph
 
 def get_routes(request, form) -> dict:
-    pass
+    context = {'form':form}
+    qs = Train.objects.all()
+    graph = get_graph(qs)
+    data = form.cleaned_data
+    from_city = data['from_city']
+    to_city = data['to_city']
+    all_ways = dfs_path(graph, from_city.id, to_city.id)
+    if not len(list(all_ways)):
+        raise ValueError('There are no routes like this')
+    return context
