@@ -28,7 +28,16 @@ def get_routes(request, form) -> dict:
     data = form.cleaned_data
     from_city = data['from_city']
     to_city = data['to_city']
+    cities = data['cities']
     all_ways = dfs_path(graph, from_city.id, to_city.id)
     if not len(list(all_ways)):
         raise ValueError('There are no routes like this')
+    if cities:
+        _cities = [city.id for city in cities]
+        right_ways = []
+        for route in all_ways:
+            if all(city in route for city in _cities):
+                right_ways.append(route)
+        if not right_ways:
+            raise ValueError('Route through this cities is impossible')
     return context
