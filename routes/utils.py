@@ -1,5 +1,19 @@
 
 
+
+def dfs_path(graph, start, goal):
+    stack = [(start, [start])]
+    while stack:
+        (vertex, path) = stack.pop()
+        if vertex in graph.keys():
+            for next_  in graph[vertex] - set(path):
+                if next_ == goal:
+                    yield path + [next_]
+                else:
+                    stack.append((next_, path + [next_]))
+
+
+
 def get_graph(qs):
     graph = {}
     for q in qs:
