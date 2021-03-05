@@ -21,7 +21,6 @@
                 {% for object in page_obj %}
                     <tr>
                         <td><a href="{% url 'trains:detail' pk=object.pk %}">{{ object.name }}</a></td>
-                        <td>{{ object.name }}</td>
                         <td>{{ object.from_city }}</td>
                         <td>{{ object.to_city }}</td>
                         <td>{{ object.travel_time }}</td>
