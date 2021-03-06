@@ -2,22 +2,42 @@
 {% url 'find_routes' as action %}
 
 {% block content %}
+    {% if not routes %}
+        {% include 'components/form.html' with button='Find' action=action %}
+    {% else %}
 
-    {% include 'components/form.html' with button='Find' action=action%}
+        <div class="row">
+            <div class="col-md-8 mx-auto">
+                {% if routes %}
+                    <h2>Route{% if routes|length != 1 %}s{% endif %} from {{ cities.from_city }}
+                        to {{ cities.to_city }}</h2>
+                    <br>
+                    
+                    {% for route in routes %}
+                        {% if forloop.first %}
+                            <h4>The most shortest route</h4>
+                        {% endif %} 
+                        <h5>Travel time {{ route.total_time }}</h5>
+                        <table class="table">
+                            <thead class="thead-dark">
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">List of trains on this route</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {% for train in route.trains %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>Train {{ train.name }} from {{ cities.from_city }} to {{ cities.to_city }}</td>
+                                </tr>
+                            {% endfor %}
+                            </tbody>
+                        </table>
 
-    <div class="row">
-        <div class="col-md-8 mx-auto">
-            {% if routes %}
-                <h3>Route from {{ cities.from_city }} to {{ cities.to_city }}</h3>
-                {% for route in routes %}
-                    <p>Travel time {{ route.total_time }}</p>
-                    <p>List of trains on this route</p>
-                    {% for train in route.trains %}
-                        <p>{{ train }}</p>
                     {% endfor %}
-                {% endfor %}
-            {% endif %}
+                {% endif %}
+            </div>
         </div>
-    </div>
-
+    {% endif %}
 {% endblock %}
