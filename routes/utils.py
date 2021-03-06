@@ -21,6 +21,23 @@ def get_graph(qs):
         graph[q.from_city_id].add(q.to_city_id)
     return graph
 
+
+def sort_by_the_travelling_time(routes):
+    sorted_routes = []
+    if len(routes) == 1:
+        return routes
+    else:
+        times = list(set(r['total_time'] for r in routes))
+        times = sorted(times)
+        for time in times:
+            for route in routes:
+                if time == route['total_time']:
+                    sorted_routes.append(route)
+    return sorted_routes
+
+
+
+
 def get_routes(request, form) -> dict:
     context = {'form':form}
     qs = Train.objects.all()
@@ -62,4 +79,8 @@ def get_routes(request, form) -> dict:
             routes.append(tmp)
     if not routes:
         raise ValueError('Travel time is bigger than needed')
+
+    sorted_routes = sort_by_the_travelling_time(routes)
+    context['routes'] = sorted_routes
+    context['cities'] = {'from_city': from_city.name, 'to_city': to_city.name}
     return context
