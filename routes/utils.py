@@ -43,7 +43,7 @@ def get_routes(request, form) -> dict:
             raise ValueError('Route through this cities is impossible')
     else:
          right_ways = all_ways
-    trains = []
+    routes = []
     all_trains = {}
     for q in qs:
         all_trains.setdefault((q.from_city_id, q.to_city_id), [])
@@ -56,10 +56,10 @@ def get_routes(request, form) -> dict:
             qs = all_trains[(route[i], route[i+1])]
             q = qs[0]
             total_time += q.travel_time
-            tmp['trains'].append(qs)
+            tmp['trains'].append(q)
         tmp['total_time'] = total_time
         if total_time <= travelling_time:
-            trains.append(tmp)
-    if not trains:
+            routes.append(tmp)
+    if not routes:
         raise ValueError('Travel time is bigger than needed')
     return context
