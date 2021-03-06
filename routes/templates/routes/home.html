@@ -5,4 +5,19 @@
 
     {% include 'components/form.html' with button='Find' action=action%}
 
+    <div class="row">
+        <div class="col-md-8 mx-auto">
+            {% if routes %}
+                <h3>Route from {{ cities.from_city }} to {{ cities.to_city }}</h3>
+                {% for route in routes %}
+                    <p>Travel time {{ route.total_time }}</p>
+                    <p>List of trains on this route</p>
+                    {% for train in route.trains %}
+                        <p>{{ train }}</p>
+                    {% endfor %}
+                {% endfor %}
+            {% endif %}
+        </div>
+    </div>
+
 {% endblock %}
