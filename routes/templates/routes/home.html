@@ -29,7 +29,7 @@
                             {% for train in route.trains %}
                                 <tr>
                                     <th scope="row">{{ forloop.counter }}</th>
-                                    <td>Train {{ train.name }} from {{ cities.from_city }} to {{ cities.to_city }}</td>
+                                    <td>Train {{ train.name }} from {{ train.from_city.name }} to {{ train.to_city.name }}</td>
                                 </tr>
                             {% endfor %}
                             </tbody>
