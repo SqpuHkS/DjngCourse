@@ -85,5 +85,5 @@ def get_routes(request, form) -> dict:
 
     sorted_routes = sort_by_the_travelling_time(routes)
     context['routes'] = sorted_routes
-    context['cities'] = {'from_city': from_city.name, 'to_city': to_city.name}
+    context['cities'] = {'from_city': from_city, 'to_city': to_city}
     return context

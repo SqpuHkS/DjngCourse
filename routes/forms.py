@@ -50,9 +50,7 @@ class RouteModelForm(forms.ModelForm):
             'class': 'form-control d-none',
         }))
 
-    travelling_time = forms.IntegerField(
-        widget=forms.HiddenInput()
-    )
+    travel_times = forms.IntegerField(widget=forms.HiddenInput())
 
     class Meta:
         model = Route
