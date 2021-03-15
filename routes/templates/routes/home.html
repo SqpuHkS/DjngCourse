@@ -12,7 +12,7 @@
                     to {{ cities.to_city.name }}</h2>
                 <br>
                 {% for route in routes %}
-                    <form action="{% url 'routes:add_route' %}" method="post">
+                    <form action="{% url 'routes:add' %}" method="post">
                         {% csrf_token %}
                         <input type="hidden" name="from_city" value="{{ cities.from_city.id }}">
                         <input type="hidden" name="to_city" value="{{ cities.to_city.id }}">

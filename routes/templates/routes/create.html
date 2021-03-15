@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="col-md-4">
-            <form action="{% url 'routes:save_route' %}" method="post">
+            <form action="{% url 'routes:save' %}" method="post">
             {% csrf_token %}
                 {% for field in form %}
                     <div class="fieldWrapper">

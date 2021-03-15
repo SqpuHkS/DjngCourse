@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="{% url 'routes:find_routes' %}">FindRoute</a>
+    <a class="navbar-brand" href="{% url 'routes:find' %}">FindRoute</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -14,7 +14,7 @@
                 <a class="nav-link" href="{% url 'trains:home' %}">Trains</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="{% url 'routes:list_route' %}">My routes</a>
+                <a class="nav-link" href="{% url 'routes:list' %}">My routes</a>
             </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown"
