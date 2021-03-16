@@ -16,19 +16,29 @@
                     <th>To</th>
                     <th>Travel time</th>
                     <th>List of trains on the route</th>
+                    {% if user.is_authenticated %}
+                        <th>&nbsp;</th>
+                    {% endif %}
                 </tr>
-                    <tr>
-                        <td>{{ object.name }}</td>
-                        <td>{{ object.from_city }}</td>
-                        <td>{{ object.to_city }}</td>
-                        <td>{{ object.travel_times }}</td>
+                <tr>
+                    <td>{{ object.name }}</td>
+                    <td>{{ object.from_city }}</td>
+                    <td>{{ object.to_city }}</td>
+                    <td>{{ object.travel_times }}</td>
+                    <td>
+                        {% for train in object.trains.all %}
+                            <p>{{ train }}<br>Travel time: {{ train.travel_time }}</p>
+                        {% endfor %}
+                    </td>
+                    {% if user.is_authenticated %}
                         <td>
-                            {% for train in object.trains.all %}
-                                <p>{{ train }}<br>Travel time: {{ train.travel_time }}</p>
-                            {% endfor %}
+                            <a href="{% url 'routes:delete' pk=object.pk %}">
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </a>
                         </td>
-                    </tr>
-                </table>
+                    {% endif %}
+                </tr>
+            </table>
         </div>
     </div>
 {% endblock %}
