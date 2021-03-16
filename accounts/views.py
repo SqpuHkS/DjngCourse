@@ -12,7 +12,7 @@ def login_view(request):
         password = form.cleaned_data.get('password')
         user = authenticate(username=username, password=password)
         login(request, user)
-        _next = _next or '/'
+        _next = _next or '/cities/'
         return redirect(_next)
     return render(request, 'accounts/login.html', {'form': form})
 
