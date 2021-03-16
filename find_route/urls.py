@@ -19,10 +19,12 @@ from django.urls import path, include
 from cities.urls import *
 from trains.urls import *
 from routes.urls import *
+from accounts.urls import *
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('cities/', include(('cities.urls', 'cities'))),
     path('trains/', include(('trains.urls', 'trains'))),
     path('routes/', include(('routes.urls', 'routes'))),
+    path('accounts/', include(('accounts.urls', 'accounts'))),
 ]
