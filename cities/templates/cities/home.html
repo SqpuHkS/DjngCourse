@@ -15,16 +15,18 @@
                         <td>
                             <a href="{% url 'cities:detail' pk=object.pk %}">{{ object.name }}</a>
                         </td>
-                        <td>
-                            <a href="{% url 'cities:update' pk=object.pk %}">
-                                <button type="submit" class="btn btn-primary">Edit</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'cities:delete' pk=object.pk %}">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </a>
-                        </td>
+                        {% if user.is_authenticated %}
+                            <td>
+                                <a href="{% url 'cities:update' pk=object.pk %}">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'cities:delete' pk=object.pk %}">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </a>
+                            </td>
+                        {% endif %}
                     </tr>
 
                 {% endfor %}
@@ -60,15 +62,16 @@
         </ul>
     </nav>
 
+    {% if user.is_authenticated %}
+        <div class="row">
+            <div class="col-md-4">
+                <form action="" method="post">
+                    {% csrf_token %}
 
-    <div class="row">
-        <div class="col-md-4">
-            <form action="" method="post">
-                {% csrf_token %}
-
-                {{form.as_p }}
-                <input type="submit" value="Submit">
-            </form>
+                    {{ form.as_p }}
+                    <input type="submit" value="Submit">
+                </form>
+            </div>
         </div>
-    </div>
+    {% endif %}
 {% endblock %}

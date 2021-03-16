@@ -15,8 +15,10 @@
                     <th>From</th>
                     <th>To</th>
                     <th>Travel time</th>
-                    <th>&nbsp</th>
-                    <th>&nbsp</th>
+                    {% if user.is_authenticated %}
+                        <th>&nbsp</th>
+                        <th>&nbsp</th>
+                    {% endif %}
                 </tr>
                 {% for object in page_obj %}
                     <tr>
@@ -24,17 +26,18 @@
                         <td>{{ object.from_city }}</td>
                         <td>{{ object.to_city }}</td>
                         <td>{{ object.travel_time }}</td>
-                        <td>
-                            <a href="{% url 'trains:update' pk=object.pk %}">
-                                <button type="submit" class="btn btn-primary">Edit</button>
-                            </a>
-                        </td>
-                        <td>
-                            <a href="{% url 'trains:delete' pk=object.pk %}">
-                                <button type="submit" class="btn btn-danger">Delete</button>
-                            </a>
-                        </td>
-
+                        {% if user.is_authenticated %}
+                            <td>
+                                <a href="{% url 'trains:update' pk=object.pk %}">
+                                    <button type="submit" class="btn btn-primary">Edit</button>
+                                </a>
+                            </td>
+                            <td>
+                                <a href="{% url 'trains:delete' pk=object.pk %}">
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </a>
+                            </td>
+                        {% endif %}
                     </tr>
                 {% endfor %}
             </table>
