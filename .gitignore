@@ -5,6 +5,7 @@ conf.py
 *.pyc
 __pycache__
 db.sqlite3
+local_settings.py
 
 # Backup files #
 *.bak
