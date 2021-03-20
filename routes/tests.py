@@ -1,3 +1,4 @@
+from django.core.exceptions import ValidationError
 from django.test import TestCase
 
 from cities.models import City
@@ -25,3 +26,14 @@ class AllTestsCase(TestCase):
         ]
 
         Train.objects.bulk_create(lst)
+
+    def test_model_city_duplicate(self):
+        city = City(name='A')
+        with self.assertRaises(ValidationError):
+            city.full_clean()
+
+    def test_model_train_duplicate(self):
+        train = Train(name='t1', from_city=self.city_A, to_city=self.city_B, travel_time=111)
+        with self.assertRaises(ValidationError):
+            train.full_clean()
+
