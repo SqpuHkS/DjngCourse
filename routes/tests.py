@@ -3,6 +3,7 @@ from django.test import TestCase
 from django.urls import reverse
 
 from cities.models import City
+from routes.forms import RouteForm
 from trains.models import Train
 
 from cities import views as cities_views
@@ -64,7 +65,25 @@ class AllTestsCase(TestCase):
             self.assertIn('Change the travel time', e.messages)
 
     def test_find_all_routes(self):
+        #Проверяем на работоспособность функции из утилс
         qs = Train.objects.all()
         graph = get_graph(qs)
         all_routes = list(dfs_path(graph, self.city_A.id, self.city_E.id))
         self.assertEqual(len(all_routes), 4)
+
+    def test_valid_route_form(self):
+        # Передаем валидные данные в форму
+        data = {'from_city': self.city_A.id, 'to_city': self.city_B.id,
+                'cities': [self.city_E.id, self.city_D.id],
+                'travelling_time': 9
+                }
+        form = RouteForm(data=data)
+        self.assertTrue(form.is_valid())
+
+    def test_invalid_route_form(self):
+        #Передаем невалидные данные в форму
+        data = {'from_city': self.city_A.id, 'to_city': self.city_B.id,
+                'cities': [self.city_E.id, self.city_D.id]
+                }
+        form = RouteForm(data=data)
+        self.assertFalse(form.is_valid())
