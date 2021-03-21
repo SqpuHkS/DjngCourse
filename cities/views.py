@@ -9,26 +9,10 @@ from cities.forms import CityForm
 from cities.models import City
 
 __all__ = (
-    'home', 'CityDetailView', 'CityCreateView', 'CityUpdateView', 'CityDeleteView',
+    'CityDetailView', 'CityCreateView', 'CityUpdateView', 'CityDeleteView',
     'CityListView'
 )
 
-
-def home(request):
-    if request.method == 'POST':
-        form = CityForm(request.POST)
-        if form.is_valid():
-            data = form.cleaned_data
-            print(data)
-            form.save()
-    qs = City.objects.all()
-    form = CityForm()
-
-    lst = Paginator(qs, 3)
-    page_number = request.GET.get('page')
-    page_obj = lst.get_page(page_number)
-    context = {'page_obj': page_obj, 'form': form}
-    return render(request, 'cities/home.html', context)
 
 class CityDetailView(DetailView):
     queryset = City.objects.all()

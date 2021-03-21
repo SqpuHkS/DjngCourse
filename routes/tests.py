@@ -5,6 +5,8 @@ from django.urls import reverse
 from cities.models import City
 from trains.models import Train
 
+from cities import views as cities_views
+
 
 class AllTestsCase(TestCase):
 
@@ -38,10 +40,19 @@ class AllTestsCase(TestCase):
         with self.assertRaises(ValidationError):
             train.full_clean()
 
-    def test_cities_home_routes_views(self):
+    def test_cities_home_views(self):
         response = self.client.get(reverse('cities:home'))
         self.assertEqual(200, response.status_code)
-        
+        self.assertTemplateUsed(response, template_name='cities/home.html')
+        self.assertEqual(response.resolver_match.func.__name__, cities_views.CityListView.as_view().__name__)
+
+    def test_cities_detail_views(self):
+        response = self.client.get(reverse('cities:detail', kwargs={'pk': self.city_A.id}))
+        self.assertEqual(200, response.status_code)
+        self.assertTemplateUsed(response, template_name='cities/detail.html')
+        self.assertEqual(response.resolver_match.func.__name__, cities_views.CityDetailView.as_view().__name__)
+
+
     def test_model_train_train_duplicate(self):
         train = Train(name='t1234', from_city=self.city_A, to_city=self.city_B, travel_time=9)
         with self.assertRaises(ValidationError):
