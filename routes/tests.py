@@ -6,6 +6,7 @@ from cities.models import City
 from trains.models import Train
 
 from cities import views as cities_views
+from routes.utils import dfs_path, get_graph
 
 
 class AllTestsCase(TestCase):
@@ -52,7 +53,6 @@ class AllTestsCase(TestCase):
         self.assertTemplateUsed(response, template_name='cities/detail.html')
         self.assertEqual(response.resolver_match.func.__name__, cities_views.CityDetailView.as_view().__name__)
 
-
     def test_model_train_train_duplicate(self):
         train = Train(name='t1234', from_city=self.city_A, to_city=self.city_B, travel_time=9)
         with self.assertRaises(ValidationError):
@@ -62,3 +62,9 @@ class AllTestsCase(TestCase):
         except ValidationError as e:
             self.assertEqual({'__all__': ['Change the travel time']}, e.message_dict)
             self.assertIn('Change the travel time', e.messages)
+
+    def test_find_all_routes(self):
+        qs = Train.objects.all()
+        graph = get_graph(qs)
+        all_routes = list(dfs_path(graph, self.city_A.id, self.city_E.id))
+        self.assertEqual(len(all_routes), 4)
