@@ -87,3 +87,11 @@ class AllTestsCase(TestCase):
                 }
         form = RouteForm(data=data)
         self.assertFalse(form.is_valid())
+
+    def test_message_error_more_time(self):
+        data = {'from_city': self.city_A.id, 'to_city': self.city_E.id,
+                'cities': [self.city_C.id],
+                'travelling_time': 9
+                }
+        response = self.client.post('/routes/find_routes/', data)
+        self.assertContains(response, 'Travel time is bigger than needed', 1, 200)
