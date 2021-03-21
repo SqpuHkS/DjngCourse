@@ -1,5 +1,6 @@
 from django.core.exceptions import ValidationError
 from django.test import TestCase
+from django.urls import reverse
 
 from cities.models import City
 from trains.models import Train
@@ -37,3 +38,16 @@ class AllTestsCase(TestCase):
         with self.assertRaises(ValidationError):
             train.full_clean()
 
+    def test_cities_home_routes_views(self):
+        response = self.client.get(reverse('cities:home'))
+        self.assertEqual(200, response.status_code)
+        
+    def test_model_train_train_duplicate(self):
+        train = Train(name='t1234', from_city=self.city_A, to_city=self.city_B, travel_time=9)
+        with self.assertRaises(ValidationError):
+            train.full_clean()
+        try:
+            train.full_clean()
+        except ValidationError as e:
+            self.assertEqual({'__all__': ['Change the travel time']}, e.message_dict)
+            self.assertIn('Change the travel time', e.messages)
